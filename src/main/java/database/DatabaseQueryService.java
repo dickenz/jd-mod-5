@@ -12,15 +12,14 @@ import java.nio.file.Path;
 
 
 public class DatabaseQueryService {
-
     public List<MaxProjectCountClient> findMaxProjectsClient() {
         List<MaxProjectCountClient> result = new ArrayList<>();
 
         try {
             Connection connection = Database.getInstance().getConnection();
             String sqlQuery = getSQLFromFile("sql/find_max_projects_client.sql");
-            PreparedStatement statement = connection.prepareStatement(sqlQuery);
-            ResultSet resultSet = statement.executeQuery();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
 
             while (resultSet.next()) {
                 String name = resultSet.getString("NAME");
@@ -44,8 +43,8 @@ public class DatabaseQueryService {
         try {
             Connection connection = Database.getInstance().getConnection();
             String sqlQuery = getSQLFromFile("sql/find_longest_project.sql");
-            PreparedStatement statement = connection.prepareStatement(sqlQuery);
-            ResultSet resultSet = statement.executeQuery();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
 
             while (resultSet.next()) {
                 int projectId = resultSet.getInt("ID");
@@ -68,8 +67,8 @@ public class DatabaseQueryService {
         try {
             Connection connection = Database.getInstance().getConnection();
             String sqlQuery = getSQLFromFile("sql/find_max_salary_worker.sql");
-            PreparedStatement statement = connection.prepareStatement(sqlQuery);
-            ResultSet resultSet = statement.executeQuery();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
 
             while (resultSet.next()) {
                 String name = resultSet.getString("NAME");
@@ -92,8 +91,8 @@ public class DatabaseQueryService {
         try {
             Connection connection = Database.getInstance().getConnection();
             String sqlQuery = getSQLFromFile("sql/find_youngest_eldest_workers.sql");
-            PreparedStatement statement = connection.prepareStatement(sqlQuery);
-            ResultSet resultSet = statement.executeQuery();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
 
             while (resultSet.next()) {
                 String type = resultSet.getString("TYPE");
@@ -117,8 +116,8 @@ public class DatabaseQueryService {
         try {
             Connection connection = Database.getInstance().getConnection();
             String sqlQuery = getSQLFromFile("sql/print_project_prices.sql");
-            PreparedStatement statement = connection.prepareStatement(sqlQuery);
-            ResultSet resultSet = statement.executeQuery();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
 
             while (resultSet.next()) {
                 int projectId = resultSet.getInt("ID");
